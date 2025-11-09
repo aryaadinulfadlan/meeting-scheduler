@@ -47,6 +47,7 @@ CREATE TABLE "users" (
 	"name" varchar NOT NULL,
 	"username" varchar NOT NULL,
 	"email" varchar NOT NULL,
+	"password" text NOT NULL,
 	"created_at" timestamp with time zone DEFAULT now() NOT NULL,
 	"updated_at" timestamp with time zone DEFAULT now() NOT NULL
 );

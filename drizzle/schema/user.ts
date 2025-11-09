@@ -1,4 +1,4 @@
-import { pgTable, varchar } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { created_at, id, updated_at } from "../schema-helpers";
 import { EventTable } from "./event";
@@ -10,6 +10,7 @@ export const UserTable = pgTable("users", {
   name: varchar().notNull(),
   username: varchar().notNull(),
   email: varchar().notNull(),
+  password: text().notNull(),
   created_at,
   updated_at,
 });
