@@ -7,12 +7,12 @@ import {
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { getSession } from "@/actions";
 import ItemDropdown from "./auth/item-dropdown";
 import LogoutButton from "./auth/logout-button";
 import { ModeToggler } from "./mode-toggler";
 import GithubLink from "./github-link";
 import { PrivateNavLinks } from "@/constants";
+import { getSession } from "@/actions/session";
 
 export default async function Header() {
   const session = await getSession();
@@ -30,7 +30,7 @@ export default async function Header() {
             <DropdownMenuTrigger>
               <Avatar className="size-7 md:size-8 cursor-pointer border border-gray-400">
                 <AvatarImage src={""} />
-                <AvatarFallback className="bg-gray-400 dark:bg-card">
+                <AvatarFallback className="bg-gray-600 dark:bg-card">
                   <FaUser className="text-white w-3 h-3" />
                 </AvatarFallback>
               </Avatar>
