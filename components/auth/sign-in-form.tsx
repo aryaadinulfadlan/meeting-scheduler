@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import { useState, useTransition } from "react";
 import { SignInSchema } from "@/schema";
 import { toast } from "sonner";
-import { AiOutlineReload } from "react-icons/ai";
+import { AiOutlineLoading } from "react-icons/ai";
 import { signIn } from "@/actions/auth";
 import AuthWrapper from "../auth-wrapper";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
@@ -114,13 +114,14 @@ export default function SignInForm() {
         <Button
           type="submit"
           form="sign-in-form"
-          className="w-full relative cursor-pointer text-base lg:text-lg font-bold"
+          className="w-full relative cursor-pointer text-base lg:text-lg font-bold lg:py-5"
           disabled={isPending}
         >
-          {isPending && (
-            <AiOutlineReload className="w-6 h-6 xl:w-8 xl:h-8 2xl:w-9 2xl:h-9 animate-spin absolute" />
+          {isPending ? (
+            <AiOutlineLoading className="size-8 lg:size-9 animate-spin absolute" />
+          ) : (
+            "Sign In"
           )}
-          Sign In
         </Button>
       </form>
     </AuthWrapper>

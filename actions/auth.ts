@@ -8,7 +8,6 @@ import {
   getUserByEmail,
   getUserByUsername,
 } from "@/drizzle/queries/auth";
-import { redirect } from "next/navigation";
 import { getSession } from "./session";
 
 export const signUp = async (values: zod.infer<typeof SignUpSchema>) => {
@@ -51,5 +50,4 @@ export const signIn = async (values: zod.infer<typeof SignInSchema>) => {
 export const signOut = async () => {
   const session = await getSession();
   session.destroy();
-  redirect("/");
 };
