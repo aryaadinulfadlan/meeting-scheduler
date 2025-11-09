@@ -5,38 +5,44 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "../ui/button";
 import { useState, useTransition } from "react";
-import { SignInSchema } from "@/schema";
+import { SignUpSchema } from "@/schema";
 import { toast } from "sonner";
 import { AiOutlineReload } from "react-icons/ai";
-import { signIn } from "@/actions/auth";
+import { signUp } from "@/actions/auth";
 import AuthWrapper from "../auth-wrapper";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import FormError from "../form-error";
+import FormSuccess from "../form-success";
 
-export default function SignInForm() {
+export default function SignUpForm() {
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
+  const [success, setSuccess] = useState<string | undefined>("");
   const { control, reset, handleSubmit } = useForm<
-    zod.infer<typeof SignInSchema>
+    zod.infer<typeof SignUpSchema>
   >({
-    resolver: zodResolver(SignInSchema),
+    resolver: zodResolver(SignUpSchema),
     defaultValues: {
+      name: "",
       username: "",
+      email: "",
       password: "",
     },
   });
-  function onSubmit({ username, password }: zod.infer<typeof SignInSchema>) {
+  function onSubmit({
+    name,
+    username,
+    email,
+    password,
+  }: zod.infer<typeof SignUpSchema>) {
     setError("");
+    setSuccess("");
     startTransition(() => {
-      signIn({ password, username })
+      signUp({ name, username, email, password })
         .then((data) => {
-          if (data?.error) {
-            setError(data.error);
-          }
-          if (!data?.error) {
-            toast.success("Successfully Logged In!");
-          }
+          setError(data.error);
+          setSuccess(data.success);
         })
         .catch(() => toast.error("Something went wrong!"))
         .finally(() => reset());
@@ -44,16 +50,42 @@ export default function SignInForm() {
   }
   return (
     <AuthWrapper
-      headerLabel="Welcome Back!"
-      footerLabel="Don't have an account?"
-      href="/sign-up"
+      headerLabel="Create an Account"
+      footerLabel="Already have an account?"
+      href="/sign-in"
     >
       <form
-        id="sign-in-form"
+        id="sign-up-form"
         onSubmit={handleSubmit(onSubmit)}
         className="space-y-8"
       >
         <FieldGroup>
+          <Controller
+            name="name"
+            control={control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid} className="gap-1.5">
+                <FieldLabel
+                  htmlFor="name"
+                  className="font-bold dark:text-white text-black"
+                >
+                  Name
+                </FieldLabel>
+                <Input
+                  {...field}
+                  type="text"
+                  id="name"
+                  aria-invalid={fieldState.invalid}
+                  placeholder="Type Name.."
+                  autoComplete="off"
+                  disabled={isPending}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
           <Controller
             name="username"
             control={control}
@@ -71,6 +103,32 @@ export default function SignInForm() {
                   id="username"
                   aria-invalid={fieldState.invalid}
                   placeholder="Type Username.."
+                  autoComplete="off"
+                  disabled={isPending}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
+          <Controller
+            name="email"
+            control={control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid} className="gap-1.5">
+                <FieldLabel
+                  htmlFor="email"
+                  className="font-bold dark:text-white text-black"
+                >
+                  Email
+                </FieldLabel>
+                <Input
+                  {...field}
+                  type="text"
+                  id="email"
+                  aria-invalid={fieldState.invalid}
+                  placeholder="Type Email.."
                   autoComplete="off"
                   disabled={isPending}
                 />
@@ -108,16 +166,17 @@ export default function SignInForm() {
           />
         </FieldGroup>
         <FormError message={error} />
+        <FormSuccess message={success} />
         <Button
           type="submit"
-          form="sign-in-form"
+          form="sign-up-form"
           className="w-full relative cursor-pointer text-base lg:text-lg font-bold"
           disabled={isPending}
         >
           {isPending && (
             <AiOutlineReload className="w-6 h-6 xl:w-8 xl:h-8 2xl:w-9 2xl:h-9 animate-spin absolute" />
           )}
-          Sign In
+          Sign Up
         </Button>
       </form>
     </AuthWrapper>
