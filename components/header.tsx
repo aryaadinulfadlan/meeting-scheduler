@@ -40,7 +40,7 @@ export default async function Header() {
               align="end"
             >
               <DropdownMenuItem className="bg-transparent focus:bg-[inital]">
-                <p className="truncate font-semibold text-sm lg:text-base text-black dark:text-foreground">
+                <p className="truncate font-semibold text-base lg:text-lg text-black dark:text-foreground">
                   {session.isLoggedIn ? session.name : "No User Logged In"}
                 </p>
               </DropdownMenuItem>

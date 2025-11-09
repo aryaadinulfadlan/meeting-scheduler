@@ -13,8 +13,10 @@ import AuthWrapper from "../auth-wrapper";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import FormError from "../form-error";
+import { useRouter } from "next/navigation";
 
 export default function SignInForm() {
+  const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [error, setError] = useState<string | undefined>("");
   const { control, reset, handleSubmit } = useForm<
@@ -34,8 +36,9 @@ export default function SignInForm() {
           if (data?.error) {
             setError(data.error);
           }
-          if (!data?.error) {
+          if (!data) {
             toast.success("Successfully Logged In!");
+            router.push("/dashboard");
           }
         })
         .catch(() => toast.error("Something went wrong!"))

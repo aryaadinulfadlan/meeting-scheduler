@@ -26,3 +26,12 @@ export const PrivateNavLinks = [
     label: "Availability",
   },
 ] as const;
+
+export const privateRoutes = [
+  "/dashboard",
+  "/events",
+  "/meetings",
+  "/availability",
+];
+
+export const authRoutes = ["/sign-in", "/sign-up"];

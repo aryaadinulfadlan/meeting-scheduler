@@ -25,7 +25,7 @@ export default function AuthWrapper({
   href,
 }: Props) {
   return (
-    <Card className="bg-gray-200 dark:bg-card text-white w-full max-w-[320px] sm:max-w-[400px] xl:max-w-[450px] mx-auto">
+    <Card className="bg-gray-200 dark:bg-card text-white w-full max-w-[340px] sm:max-w-[400px] xl:max-w-[450px] mx-auto">
       <CardHeader>
         <div className="w-full flex flex-col gap-y-2 xl:gap-y-4 items-center justify-center">
           <h1

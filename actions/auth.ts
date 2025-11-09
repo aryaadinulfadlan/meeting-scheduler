@@ -14,38 +14,38 @@ import { getSession } from "./session";
 export const signUp = async (values: zod.infer<typeof SignUpSchema>) => {
   const validatedFields = SignUpSchema.safeParse(values);
   if (!validatedFields.success) {
-    return { error: "Invalid Fields!" };
+    return { error: "Invalid fields!" };
   }
   const { password, username, email, name } = validatedFields.data;
-  const existingUser = await getUserByEmail(email);
-  if (existingUser) {
-    return { error: "Email Already Exists!" };
+  const existingUserByEmail = await getUserByEmail(email);
+  const existingUserByUsername = await getUserByUsername(username);
+  if (existingUserByEmail || existingUserByUsername) {
+    return { error: "Account already exists!" };
   }
   const hashedPassword = await bcrypt.hash(password, 10);
   await createUser({ name, username, email, password: hashedPassword });
-  return { success: "Account Created, Please Sign In!" };
+  return { success: "Account is created, please Sign In." };
 };
 
 export const signIn = async (values: zod.infer<typeof SignInSchema>) => {
   const validatedFields = SignInSchema.safeParse(values);
   if (!validatedFields.success) {
-    return { error: "Invalid Fields!" };
+    return { error: "Invalid fields!" };
   }
   const { username, password } = validatedFields.data;
   const existingUser = await getUserByUsername(username);
   if (!existingUser) {
-    return { error: "Account Does not Exist!" };
+    return { error: "Account is not exist!" };
   }
   const passwordMatched = await bcrypt.compare(password, existingUser.password);
   if (!passwordMatched) {
-    return { error: "Account Does not Exist!" };
+    return { error: "Account is not exist!" };
   }
   const session = await getSession();
   session.name = existingUser.name;
   session.username = existingUser.username;
   session.isLoggedIn = true;
   await session.save();
-  redirect("/dashboard");
 };
 
 export const signOut = async () => {
