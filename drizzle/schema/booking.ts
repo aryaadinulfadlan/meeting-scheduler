@@ -15,6 +15,7 @@ export const BookingTable = pgTable("bookings", {
   guest_name: varchar().notNull(),
   guest_email: varchar().notNull(),
   additional_info: text(),
+  timezone: varchar().notNull(),
   start_time: timestamp({ withTimezone: true }).notNull(),
   end_time: timestamp({ withTimezone: true }).notNull(),
   meet_link: varchar().notNull(),

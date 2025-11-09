@@ -14,6 +14,7 @@ CREATE TABLE "bookings" (
 	"guest_name" varchar NOT NULL,
 	"guest_email" varchar NOT NULL,
 	"additional_info" text,
+	"timezone" varchar NOT NULL,
 	"start_time" timestamp with time zone NOT NULL,
 	"end_time" timestamp with time zone NOT NULL,
 	"meet_link" varchar NOT NULL,

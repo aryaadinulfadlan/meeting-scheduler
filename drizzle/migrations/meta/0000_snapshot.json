@@ -1,5 +1,5 @@
 {
-  "id": "14526cee-22bf-49c4-a549-898b194ce460",
+  "id": "8c454f42-d342-40c2-a98d-d74752ba58b6",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -104,6 +104,12 @@
           "type": "text",
           "primaryKey": false,
           "notNull": false
+        },
+        "timezone": {
+          "name": "timezone",
+          "type": "varchar",
+          "primaryKey": false,
+          "notNull": true
         },
         "start_time": {
           "name": "start_time",
