@@ -20,7 +20,7 @@ export default async function Header() {
         <div className="flex items-center gap-1">
           {session.isLoggedIn && <MobileSidebar />}
           <Link href={"/"}>
-            <p className="text-sm md:text-base font-bold">MeetScheduler</p>
+            <p className="text-sm md:text-base font-bold">MeetSchedulr</p>
           </Link>
         </div>
         <div className="flex items-center gap-4 xl:gap-4">
