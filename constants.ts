@@ -8,25 +8,6 @@ export const DAYS_OF_WEEK = [
   "SUNDAY",
 ] as const;
 
-export const PrivateNavLinks = [
-  {
-    route: "/dashboard",
-    label: "Dashboard",
-  },
-  {
-    route: "/events",
-    label: "My Events",
-  },
-  {
-    route: "/meetings",
-    label: "Meetings",
-  },
-  {
-    route: "/availability",
-    label: "Availability",
-  },
-] as const;
-
 export const privateRoutes = [
   "/dashboard",
   "/events",

@@ -10,15 +10,15 @@ export default function SignOutButton() {
   const handleLogout = () => {
     signOut()
       .then(() => {
-        toast.success("Successfully logout!");
         router.push("/dashboard");
+        toast.success("Successfully logout!");
       })
       .catch(() => toast.error("Something went wrong!"));
   };
   return (
     <div
       onClick={handleLogout}
-      className="flex items-center gap-4 p-3 hover:bg-secondary cursor-pointer"
+      className="flex items-center gap-4 p-3 hover:bg-sidebar-ring/20 dark:hover:bg-secondary cursor-pointer"
     >
       <LuLogOut className="size-4 md:size-5" />
       <span className="font-bold text-sm md:text-base">Sign Out</span>
