@@ -7,7 +7,7 @@ import { Button } from "../ui/button";
 import { useState, useTransition } from "react";
 import { SignInSchema } from "@/schema";
 import { toast } from "sonner";
-import { AiOutlineLoading } from "react-icons/ai";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { signIn } from "@/actions/auth";
 import AuthWrapper from "../auth-wrapper";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
@@ -118,7 +118,7 @@ export default function SignInForm() {
           disabled={isPending}
         >
           {isPending ? (
-            <AiOutlineLoading className="size-8 lg:size-9 animate-spin absolute" />
+            <AiOutlineLoading3Quarters className="size-7 lg:size-9 animate-spin absolute" />
           ) : (
             "Sign In"
           )}

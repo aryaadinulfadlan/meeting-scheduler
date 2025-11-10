@@ -1,6 +1,6 @@
 "use server";
 
-import { defaultSession, SessionData, sessionOptions } from "@/lib";
+import { defaultSession, SessionData, sessionOptions } from "@/lib/utils";
 import { getIronSession } from "iron-session";
 import { cookies } from "next/headers";
 

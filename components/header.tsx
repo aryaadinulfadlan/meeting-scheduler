@@ -9,16 +9,20 @@ import { ModeToggler } from "./mode-toggler";
 import GithubLink from "./github-link";
 import { getSession } from "@/actions/session";
 import { Button } from "./ui/button";
+import MobileSidebar from "./mobile-sidebar";
 
 export default async function Header() {
   const session = await getSession();
   console.log({ session });
   return (
-    <div className="sticky top-0 h-10 md:h-14 flex items-center z-10 bg-gray-200 dark:bg-card">
-      <div className="flex items-center justify-between mx-auto max-w-[1600px] w-full px-6">
-        <Link href={"/"}>
-          <p className="text-sm md:text-base font-bold">MeetScheduler</p>
-        </Link>
+    <div className="sticky top-0 h-10 md:h-14 flex items-center z-10 bg-accent dark:bg-card">
+      <div className="flex items-center justify-between mx-auto max-w-[1600px] w-full px-3 md:px-6">
+        <div className="flex items-center gap-1">
+          {session.isLoggedIn && <MobileSidebar />}
+          <Link href={"/"}>
+            <p className="text-sm md:text-base font-bold">MeetScheduler</p>
+          </Link>
+        </div>
         <div className="flex items-center gap-4 xl:gap-4">
           <GithubLink />
           <ModeToggler />
@@ -30,7 +34,7 @@ export default async function Header() {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-52 xl:w-68 bg-gray-200 dark:bg-card grid gap-2 lg:gap-3"
+                className="w-30 xl:w-40 bg-accent dark:bg-card grid gap-2 lg:gap-3"
                 align="end"
               >
                 <ItemDropdown label="Sign In" href="/sign-in" />
