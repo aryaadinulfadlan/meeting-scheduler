@@ -118,7 +118,7 @@ export default function SignInForm() {
           disabled={isPending}
         >
           {isPending ? (
-            <AiOutlineLoading3Quarters className="size-7 lg:size-9 animate-spin absolute" />
+            <AiOutlineLoading3Quarters className="size-7 lg:size-8 animate-spin absolute" />
           ) : (
             "Sign In"
           )}

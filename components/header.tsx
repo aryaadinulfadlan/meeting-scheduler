@@ -20,13 +20,13 @@ export default async function Header() {
         <div className="flex items-center gap-1">
           {session.isLoggedIn && <MobileSidebar />}
           <Link href={"/"}>
-            <p className="text-sm md:text-base font-bold">MeetSchedulr</p>
+            <p className="text-sm md:text-base font-bold">AryaScheduler</p>
           </Link>
         </div>
         <div className="flex items-center gap-4 xl:gap-4">
           <GithubLink />
           <ModeToggler />
-          {!session.isLoggedIn && (
+          {!session.isLoggedIn ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button size="icon-sm" className="font-bold" variant="outline">
@@ -41,6 +41,10 @@ export default async function Header() {
                 <ItemDropdown label="Sign Up" href="/sign-up" />
               </DropdownMenuContent>
             </DropdownMenu>
+          ) : (
+            <Button size="icon-sm" asChild className="font-bold">
+              <Link href="/dashboard">Dashboard</Link>
+            </Button>
           )}
         </div>
       </div>

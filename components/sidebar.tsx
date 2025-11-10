@@ -2,6 +2,7 @@ import { MdEventNote, MdSpaceDashboard } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
 import { FaClock } from "react-icons/fa6";
 import Link from "next/link";
+import SignOutButton from "./auth/sign-out-button";
 
 export default function Sidebar() {
   return (
@@ -34,6 +35,7 @@ export default function Sidebar() {
         <FaClock className="size-4 md:size-5" />
         <span className="font-bold text-sm md:text-base">Availability</span>
       </Link>
+      <SignOutButton />
     </div>
   );
 }
