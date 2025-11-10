@@ -10,7 +10,7 @@ export default function PrivateLayout({
       <div className="fixed w-56 shrink-0 hidden md:block h-[calc(100vh-2.5rem)] md:h-[calc(100vh-3.5rem)] bg-accent dark:bg-card">
         <Sidebar />
       </div>
-      <div className="min-h-[calc(100vh-2.5rem)] md:min-h-[calc(100vh-3.5rem)] left-56 md:relative">
+      <div className="min-h-[calc(100vh-2.5rem)] md:min-h-[calc(100vh-3.5rem)] left-56 md:relative w-full md:w-[calc(100vw-14rem)]">
         {children}
       </div>
     </div>

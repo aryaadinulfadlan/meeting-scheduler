@@ -51,7 +51,7 @@ export default function Home() {
               </div>
               <DialogFooter>
                 <DialogClose asChild>
-                  <Button className="font-bold">Okay</Button>
+                  <Button className="font-bold">Understood</Button>
                 </DialogClose>
               </DialogFooter>
             </DialogContent>
