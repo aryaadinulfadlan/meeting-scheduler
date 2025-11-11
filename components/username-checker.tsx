@@ -11,7 +11,11 @@ export default function UsernameChecker() {
   return (
     <div className="text-sm lg:text-base grid gap-2 mt-1">
       Or you can check the username here to see if they have a schedule.
-      <Input value={text} onChange={(e) => setText(e.target.value)} />
+      <Input
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        placeholder="Username"
+      />
       <Button size="icon-sm" asChild className="font-semibold">
         <Link href={`${origin}/${text}`}>Check</Link>
       </Button>
