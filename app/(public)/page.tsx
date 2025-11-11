@@ -1,13 +1,12 @@
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import UsernameChecker from "@/components/username-checker";
 import Image from "next/image";
 import { FaHandPointRight } from "react-icons/fa";
 
@@ -32,7 +31,7 @@ export default function Home() {
               <DialogHeader>
                 <DialogTitle>Who do you want to be?</DialogTitle>
               </DialogHeader>
-              <div className="grid gap-2">
+              <div className="grid gap-4">
                 <div className="flex items-start gap-3">
                   <FaHandPointRight className="shrink-0 size-5 lg:size-6" />
                   <span className="text-sm lg:text-base">
@@ -48,12 +47,8 @@ export default function Home() {
                     your browser.
                   </span>
                 </div>
+                <UsernameChecker />
               </div>
-              <DialogFooter>
-                <DialogClose asChild>
-                  <Button className="font-bold">Understood</Button>
-                </DialogClose>
-              </DialogFooter>
             </DialogContent>
           </Dialog>
         </div>
