@@ -10,7 +10,7 @@ import {
 export default async function Dashboard() {
   const session = await getSession();
   return (
-    <div className="grid gap-6 py-6 px-4">
+    <div className="grid gap-8 py-6 px-4">
       <p className="font-bold text-xl md:text-3xl">Dashboard</p>
       <Card>
         <CardHeader>
