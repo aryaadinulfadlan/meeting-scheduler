@@ -11,6 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { FaVideo } from "react-icons/fa";
 import { MdEventNote } from "react-icons/md";
 import { FaClock } from "react-icons/fa6";
+import { sleep } from "@/lib/utils";
 
 const data = [
   {
@@ -45,6 +46,7 @@ const data = [
   },
 ];
 export default async function Meetings() {
+  await sleep(500);
   return (
     <div className="grid gap-8 py-6 lg:py-8 px-4 lg:px-6">
       <p className="font-bold text-xl md:text-3xl">Meetings</p>

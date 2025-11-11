@@ -6,8 +6,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { sleep } from "@/lib/utils";
 
 export default async function Dashboard() {
+  await sleep(500);
   const session = await getSession();
   return (
     <div className="grid gap-8 py-6 lg:py-8 px-4 lg:px-6">
