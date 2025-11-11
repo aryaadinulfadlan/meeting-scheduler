@@ -37,7 +37,7 @@ const data = [
 ];
 export default async function Events() {
   return (
-    <div className="grid gap-8 py-6 px-4">
+    <div className="grid gap-8 py-6 lg:py-8 px-4 lg:px-6">
       <p className="font-bold text-xl md:text-3xl">My Events</p>
       <div className="grid grid-cols-[1fr] sm:grid-cols-[1fr_1fr] md:grid-cols-[1fr] lg:grid-cols-[1fr_1fr] xl:grid-cols-[1fr_1fr_1fr] gap-4 lg:gap-6">
         {data.map((el, idx) => (
@@ -48,14 +48,18 @@ export default async function Events() {
             </CardHeader>
             <CardContent>{el.description}</CardContent>
             <CardFooter className="gap-2">
-              <Button className="font-bold" size="icon-sm" variant="outline">
+              <Button
+                className="font-bold text-xs md:text-sm"
+                size="icon-sm"
+                variant="outline"
+              >
                 Copy Link
               </Button>
-              <Button className="font-bold" size="icon-sm">
+              <Button className="font-bold text-xs md:text-sm" size="icon-sm">
                 Update
               </Button>
               <Button
-                className="font-bold"
+                className="font-bold text-xs md:text-sm"
                 size="icon-sm"
                 variant="destructive"
               >
