@@ -73,7 +73,7 @@ export default async function UserProfile({ params }: Props) {
             </Card>
           ))
         ) : (
-          <EmptyData text="No Events Data Available" />
+          <EmptyData text="No Events Data Available." />
         )}
       </div>
     </div>

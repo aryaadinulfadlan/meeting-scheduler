@@ -1,3 +1,5 @@
+"use server";
+
 import { eq } from "drizzle-orm";
 import { UserTable } from "../schema";
 import { db } from "../db";

@@ -11,7 +11,7 @@ export async function getUserProfileByUsername(username: string) {
     with: {
       events: {
         orderBy: desc(EventTable.created_at),
-        where: eq(UserTable.id, EventTable.id),
+        where: eq(UserTable.id, EventTable.user_id),
         columns: { title: true, description: true, duration_in_minutes: true },
       },
     },

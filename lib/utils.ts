@@ -7,12 +7,14 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export interface SessionData {
+  user_id: string;
   name: string;
   username: string;
   isLoggedIn: boolean;
 }
 
 export const defaultSession: SessionData = {
+  user_id: "",
   name: "",
   username: "",
   isLoggedIn: false,

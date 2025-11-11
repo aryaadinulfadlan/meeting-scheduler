@@ -1,5 +1,5 @@
 export default function EmptyData({
-  text = "No Data Available",
+  text = "No Data Available.",
 }: {
   text?: string;
 }) {

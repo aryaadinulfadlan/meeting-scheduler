@@ -41,6 +41,7 @@ export const signIn = async (values: zod.infer<typeof SignInSchema>) => {
     return { error: "Account is not exist!" };
   }
   const session = await getSession();
+  session.user_id = existingUser.id;
   session.name = existingUser.name;
   session.username = existingUser.username;
   session.isLoggedIn = true;
