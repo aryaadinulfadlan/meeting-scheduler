@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { getUserByUsername } from "@/drizzle/queries/auth";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
@@ -10,7 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { getUserProfileByUsername } from "@/drizzle/queries/user";
+import {
+  getUserByUsername,
+  getUserProfileByUsername,
+} from "@/drizzle/queries/user";
 import EmptyData from "@/components/empty-data";
 
 type Props = {
@@ -45,6 +47,7 @@ export default async function UserProfile({ params }: Props) {
       </div>
     );
   }
+  console.log({ user });
   return (
     <div className="min-h-[calc(100vh-2.5rem)] md:min-h-[calc(100vh-3.5rem)] py-8 lg:py-12 px-4 lg:px-0 max-w-4xl mx-auto">
       <div className="flex flex-col gap-1">
@@ -59,14 +62,19 @@ export default async function UserProfile({ params }: Props) {
       <div className="mt-8 lg:mt-12 grid gap-3 lg:gap-6 grid-cols-[1fr] sm:grid-cols-[1fr_1fr]">
         {user.events.length > 0 ? (
           user.events.map((el, idx) => (
-            <Card key={`${idx}-${el.title}`} className="lg:max-w-none">
+            <Card key={`${idx}-${el.id}`} className="lg:max-w-none">
               <CardHeader>
                 <CardTitle>{el.title}</CardTitle>
-                <CardDescription>{el.duration_in_minutes}</CardDescription>
+                <CardDescription>
+                  {el.duration_in_minutes} minutes
+                </CardDescription>
               </CardHeader>
               <CardContent>{el.description}</CardContent>
               <CardFooter>
-                <Button className="font-bold text-xs md:text-sm" size="icon-sm">
+                <Button
+                  className="font-bold text-xs md:text-sm ml-auto"
+                  size="icon-sm"
+                >
                   Book Now
                 </Button>
               </CardFooter>
