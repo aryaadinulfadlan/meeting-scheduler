@@ -54,6 +54,9 @@ export const AvailabilitySchema = zod.object({
     .number()
     .min(0, { message: "Time gap must be 0 or more minutes" })
     .int(),
+  // time_gap: zod
+  //   .string()
+  //   .regex(/^(0|[1-9][0-9]*)$/, "Time gap must be 0 or more minutes"),
 });
 
 export const EventSchema = zod.object({

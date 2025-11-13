@@ -1,4 +1,4 @@
-import { pgEnum, pgTable, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgEnum, pgTable, timestamp, uuid, varchar } from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { created_at, id, updated_at } from "../schema-helpers";
 import { AvailabilityTable } from "./availability";
@@ -12,7 +12,8 @@ export const DayAvailabilityTable = pgTable("day_availabilities", {
   availability_id: uuid()
     .notNull()
     .references(() => AvailabilityTable.id, { onDelete: "cascade" }),
-  day: daysOfWeekEnum().notNull(),
+  day: varchar().notNull(),
+  // day: daysOfWeekEnum().notNull(),
   start_time: timestamp({ withTimezone: true }).notNull(),
   end_time: timestamp({ withTimezone: true }).notNull(),
   created_at,

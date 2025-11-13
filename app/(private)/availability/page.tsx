@@ -7,7 +7,7 @@ export default async function Availability() {
   const user_availability = await getUserAvailabilityAction();
   console.log({ user_availability });
   return (
-    <div className="grid gap-8 py-6 lg:py-8 px-4 lg:px-6">
+    <div className="grid gap-8 py-6 lg:py-8 px-6 lg:px-10">
       <p className="font-bold text-xl md:text-3xl">Availability</p>
       <AvailabilityForm user_availability={user_availability} />
     </div>

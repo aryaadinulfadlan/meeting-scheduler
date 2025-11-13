@@ -15,6 +15,10 @@ import {
   getUserWithDayAvailability,
 } from "@/drizzle/queries/user";
 import { DAYS_OF_WEEK } from "@/constants";
+import {
+  createAvailability,
+  updateAvailability,
+} from "@/drizzle/queries/availability";
 
 type DayData = {
   is_available: boolean;
@@ -62,56 +66,46 @@ export async function getUserAvailabilityAction() {
   return availability_data;
 }
 
-// export async function updateAvailability(data: AvailabilityData) {
-//   const authenticated_user = await getSession();
-//   if (!authenticated_user.isLoggedIn || !authenticated_user.user_id) {
-//     return { error: "Unauthorized" };
-//   }
-//   const user = await getUserWithAvailability(authenticated_user.user_id);
-//   if (!user) {
-//     return { error: "User not found" };
-//   }
-//   const availabilityData = Object.entries(data).flatMap(
-//     ([day, s]) => {
-//       if (isAvailable) {
-//         const baseDate = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
+export async function updateAvailabilityAction(data: AvailabilityData) {
+  const authenticated_user = await getSession();
+  if (!authenticated_user.isLoggedIn || !authenticated_user.user_id) {
+    return { error: "Unauthorized" };
+  }
+  const user = await getUserWithAvailability(authenticated_user.user_id);
+  if (!user) {
+    return { error: "User not found" };
+  }
+  const { time_gap, ...rest } = data;
+  const day_availability = Object.entries(rest).flatMap(
+    ([day, { is_available, start_time, end_time }]) => {
+      if (is_available) {
+        const base_date = new Date().toISOString().split("T")[0]; // Get current date in YYYY-MM-DD format
+        return [
+          {
+            day: day.toUpperCase(),
+            start_time: new Date(`${base_date}T${start_time}:00Z`),
+            end_time: new Date(`${base_date}T${end_time}:00Z`),
+          },
+        ];
+      }
+      return [];
+    }
+  );
 
-//         return [
-//           {
-//             day: day.toUpperCase(),
-//             startTime: new Date(`${baseDate}T${startTime}:00Z`),
-//             endTime: new Date(`${baseDate}T${endTime}:00Z`),
-//           },
-//         ];
-//       }
-//       return [];
-//     }
-//   );
-
-//   if (user.availability) {
-//     await db.availability.update({
-//       where: { id: user.availability.id },
-//       data: {
-//         timeGap: data.timeGap,
-//         days: {
-//           deleteMany: {},
-//           create: availabilityData,
-//         },
-//       },
-//     });
-//   } else {
-//     await db.availability.create({
-//       data: {
-//         userId: user.id,
-//         timeGap: data.timeGap,
-//         days: {
-//           create: availabilityData,
-//         },
-//       },
-//     });
-//   }
-//   return { success: true };
-// }
+  if (user.availability) {
+    await updateAvailability(
+      user.availability.id,
+      { time_gap: time_gap as number, user_id: authenticated_user.user_id },
+      day_availability
+    );
+  } else {
+    await createAvailability(
+      { time_gap: time_gap as number, user_id: authenticated_user.user_id },
+      day_availability
+    );
+  }
+  return { success: true };
+}
 
 export async function getEventAvailabilityAction(eventId: string) {
   const event = await getEventWithUserAvailabilityBookings(eventId);

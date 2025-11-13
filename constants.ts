@@ -35,6 +35,8 @@ export const time_slots = [
   "15:00",
   "15:30",
   "16:00",
+  "16:30",
+  "17:00",
 ];
 
 export const default_availability = {
