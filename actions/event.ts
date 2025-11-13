@@ -3,15 +3,18 @@
 import { EventSchema } from "@/schema";
 import * as zod from "zod";
 import { getSession } from "./session";
-import { getUserById } from "@/drizzle/queries/auth";
 import {
   deleteEvent,
-  getEvent,
+  getEventById,
   getUserEvents,
-  insertEvent,
+  createEvent,
 } from "@/drizzle/queries/event";
+import { getUserById } from "@/drizzle/queries/user";
+import { revalidatePath } from "next/cache";
 
-export const createEvent = async (values: zod.infer<typeof EventSchema>) => {
+export const createEventAction = async (
+  values: zod.infer<typeof EventSchema>
+) => {
   const authenticated_user = await getSession();
   if (!authenticated_user.isLoggedIn || !authenticated_user.user_id) {
     return { error: "Unauthorized" };
@@ -25,29 +28,30 @@ export const createEvent = async (values: zod.infer<typeof EventSchema>) => {
     return { error: "User not found" };
   }
   const { duration_in_minutes, title, description } = validatedFields.data;
-  await insertEvent({
+  await createEvent({
     user_id: authenticated_user.user_id,
     title,
     description,
-    duration_in_minutes,
+    duration_in_minutes: parseInt(duration_in_minutes),
   });
-  return { success: "Event is created" };
+  revalidatePath("/events");
+  return { success: "Successfully create a new event!" };
 };
 
-export const getUserEvent = async () => {
+export const getUserEventsAction = async () => {
   const authenticated_user = await getSession();
   if (!authenticated_user.isLoggedIn || !authenticated_user.user_id) {
-    return { error: "Unauthorized" };
+    throw new Error("Unauthorized");
   }
   const existing_user = await getUserById(authenticated_user.user_id);
   if (!existing_user) {
-    return { error: "User not found" };
+    throw new Error("User not found");
   }
   const events = await getUserEvents(authenticated_user.user_id);
   return events;
 };
 
-export const removeEvent = async (eventId: string) => {
+export const deleteEventAction = async (eventId: string) => {
   const authenticated_user = await getSession();
   if (!authenticated_user.isLoggedIn || !authenticated_user.user_id) {
     return { error: "Unauthorized" };
@@ -56,10 +60,11 @@ export const removeEvent = async (eventId: string) => {
   if (!existing_user) {
     return { error: "User not found" };
   }
-  const event = await getEvent(eventId);
+  const event = await getEventById(eventId);
   if (!event || event.user_id !== authenticated_user.user_id) {
     return { error: "Event is not found or Unauthorized" };
   }
   await deleteEvent(eventId);
+  revalidatePath("/events");
   return { success: "Event is deleted" };
 };

@@ -43,14 +43,14 @@ export const DaySchema = zod
   );
 
 export const AvailabilitySchema = zod.object({
-  monday: DaySchema,
-  tuesday: DaySchema,
-  wednesday: DaySchema,
-  thursday: DaySchema,
-  friday: DaySchema,
-  saturday: DaySchema,
-  sunday: DaySchema,
-  timeGap: zod
+  MONDAY: DaySchema,
+  TUESDAY: DaySchema,
+  WEDNESDAY: DaySchema,
+  THURSDAY: DaySchema,
+  FRIDAY: DaySchema,
+  SATURDAY: DaySchema,
+  SUNDAY: DaySchema,
+  time_gap: zod
     .number()
     .min(0, { message: "Time gap must be 0 or more minutes" })
     .int(),
@@ -65,10 +65,7 @@ export const EventSchema = zod.object({
     .string()
     .max(50, { message: "Description is maximum 50 characters!" })
     .optional(),
-  duration_in_minutes: zod
-    .number()
-    .int()
-    .positive({ message: "Duration must be a positive number" }),
+  duration_in_minutes: zod.string().regex(/^[1-9][0-9]*$/, "Invalid Duration"),
 });
 
 export const BookingSchema = zod.object({

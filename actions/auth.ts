@@ -3,12 +3,12 @@
 import * as zod from "zod";
 import bcrypt from "bcryptjs";
 import { SignInSchema, SignUpSchema } from "@/schema";
+import { getSession } from "./session";
 import {
   createUser,
   getUserByEmail,
   getUserByUsername,
-} from "@/drizzle/queries/auth";
-import { getSession } from "./session";
+} from "@/drizzle/queries/user";
 
 export const signUp = async (values: zod.infer<typeof SignUpSchema>) => {
   const validatedFields = SignUpSchema.safeParse(values);

@@ -9,7 +9,7 @@ import { SignUpSchema } from "@/schema";
 import { toast } from "sonner";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { signUp } from "@/actions/auth";
-import AuthWrapper from "../auth-wrapper";
+import CardWrapper from "./card-wrapper";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import FormError from "../form-error";
@@ -49,7 +49,7 @@ export default function SignUpForm() {
     });
   }
   return (
-    <AuthWrapper
+    <CardWrapper
       headerLabel="Create an Account"
       footerLabel="Already have an account?"
       href="/sign-in"
@@ -180,6 +180,6 @@ export default function SignUpForm() {
           )}
         </Button>
       </form>
-    </AuthWrapper>
+    </CardWrapper>
   );
 }

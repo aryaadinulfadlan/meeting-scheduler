@@ -1,4 +1,9 @@
+import { getEventAvailabilityAction } from "@/actions/availability";
+import BookingForm from "@/components/booking-form";
+import EventDetails from "@/components/event/event-details";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { getEventDetails } from "@/drizzle/queries/event";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -31,6 +36,7 @@ export default async function EventPage({ params }: Props) {
     notFound();
   }
   const event = await getEventDetails(eventId);
+  const availability = await getEventAvailabilityAction(eventId);
   if (!event) {
     return (
       <div className="h-[calc(80vh-2.5rem)] md:h-[calc(80vh-3.5rem)] text-2xl font-bold lg:text-5xl flex flex-col gap-4 lg:gap-6 items-center justify-center">
@@ -41,5 +47,16 @@ export default async function EventPage({ params }: Props) {
       </div>
     );
   }
-  return <div>EventPage</div>;
+  return (
+    <div className="min-h-[calc(100vh-2.5rem)] md:min-h-[calc(100vh-3.5rem)] pt-8 pb-6 px-4 max-w-[360px] md:max-w-[550px] lg:max-w-[850px] mx-auto">
+      <Card className="rounded-md">
+        <CardContent className="grid gap-4 lg:grid-cols-[1fr_auto_2fr]">
+          <EventDetails event={event} />
+          <Separator orientation="horizontal" className="lg:hidden" />
+          <div className="hidden lg:block" />
+          <BookingForm event={event} availability={availability} />
+        </CardContent>
+      </Card>
+    </div>
+  );
 }

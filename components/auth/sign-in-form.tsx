@@ -9,7 +9,7 @@ import { SignInSchema } from "@/schema";
 import { toast } from "sonner";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { signIn } from "@/actions/auth";
-import AuthWrapper from "../auth-wrapper";
+import CardWrapper from "./card-wrapper";
 import { Field, FieldError, FieldGroup, FieldLabel } from "../ui/field";
 import { Input } from "../ui/input";
 import FormError from "../form-error";
@@ -46,7 +46,7 @@ export default function SignInForm() {
     });
   }
   return (
-    <AuthWrapper
+    <CardWrapper
       headerLabel="Welcome Back!"
       footerLabel="Don't have an account?"
       href="/sign-up"
@@ -124,6 +124,6 @@ export default function SignInForm() {
           )}
         </Button>
       </form>
-    </AuthWrapper>
+    </CardWrapper>
   );
 }

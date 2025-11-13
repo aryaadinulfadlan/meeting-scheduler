@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { Poppins } from "next/font/google";
 import { FaLock } from "react-icons/fa";
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import Link from "next/link";
 
 const font = Poppins({
@@ -18,7 +18,7 @@ interface Props {
   href: string;
 }
 
-export default function AuthWrapper({
+export default function AuthCardWrapper({
   children,
   headerLabel,
   footerLabel,
