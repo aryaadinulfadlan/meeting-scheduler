@@ -10,7 +10,7 @@ export default async function EventDetails({
 }) {
   return (
     <div className="grid gap-3 lg:gap-4 lg:content-start">
-      <p className="font-bold text-2xl lg:text-4xl">{event?.title}</p>
+      <p className="font-bold text-xl lg:text-3xl">{event?.title}</p>
       <div className="flex items-center gap-3">
         <Avatar className="bg-red-700 size-9 md:size-10 lg:size-10.5">
           <AvatarFallback className="bg-sky-900">

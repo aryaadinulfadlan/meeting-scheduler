@@ -74,8 +74,9 @@ export default async function UserProfile({ params }: Props) {
                 <Button
                   className="font-bold text-xs md:text-sm ml-auto"
                   size="icon-sm"
+                  asChild
                 >
-                  Book Now
+                  <Link href={`/${username}/${el.id}`}>Book Now</Link>
                 </Button>
               </CardFooter>
             </Card>
